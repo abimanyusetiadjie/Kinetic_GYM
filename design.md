@@ -1,38 +1,49 @@
-# UI/UX Design System & Information Architecture — Full-Stack TypeScript & Supabase
+# UI/UX Design System & Information Architecture — KINETIC Platform
 
 ---
 
 ## 1. Brand Identity & Filosofi Visual
 
 ### 1.1 Karakter & Visual Direction
-Desain platform mengusung tema **High-Energy Athletic Tech**. Tampilan memadukan kesan modern, premium, dan bertenaga tinggi seperti FitHub dengan tata letak minimalis, tipografi tegas (*bold typographic hierarchy*), kontras visual tinggi, dan kemudahan navigasi mobile-first (*frictionless digital fitness experience*).
+Desain platform mengusung tema **High-Energy Athletic Tech**. Tampilan memadukan kesan modern, premium, dan bertenaga tinggi dengan tata letak minimalis, tipografi tegas (*bold typographic hierarchy*), kontras visual tinggi, dan kemudahan navigasi mobile-first (*frictionless digital fitness experience*).
 
+- **Dual Theme Support**: Mendukung peralihan mulus antara mode gelap agresif (**Obsidian Black**) dan mode terang futuristik (**Titanium Lab Edition**).
 - **Energetic & Motivating**: Aksen warna *Volt Green* (`#CAFF33`), *Electric Orange* (`#FF5E1E`), dan *Cyan* (`#00E5FF`).
 - **Clean & Accessible**: Hirarki informasi bersih, kartu data terstruktur, tanpa dekorasi berlebihan.
-- **Full TypeScript Implementation**: Dibangun menggunakan komponen React (Next.js 15) untuk Web & Admin, serta React Native (Expo) untuk Mobile App.
+- **Full TypeScript Implementation**: Dibangun menggunakan Next.js 15 App Router, React 19, Tailwind CSS, dan Framer Motion.
 
 ---
 
-## 2. Design Tokens (Sistem Desain)
+## 2. Design Tokens (Dual-Theme System)
 
-### 2.1 Palet Warna (Color Palette)
+### 2.1 Palet Tema Gelap (Obsidian Theme — Default)
 
 | Kategori Token | Hex Code | Penggunaan |
 | :--- | :--- | :--- |
-| `--bg-dark` | `#0A0D14` | Latar belakang utama dark mode, navbar, hero section. |
-| `--surface-dark` | `#111827` | Permukaan kartu (*cards*), dialog modal, bottom sheet. |
+| `--bg` | `#0A0D14` | Latar belakang utama dark mode, navbar, hero section. |
+| `--surface` | `#111827` | Permukaan kartu (*cards*), dialog modal, bottom sheet. |
 | `--surface-elevated` | `#1A2235` | State kartu saat di-hover, floating controls, input field. |
 | `--brand-volt` | `#CAFF33` | Aksen tombol utama (*Primary CTA*), highlight badge, active indicator. |
 | `--brand-orange` | `#FF5E1E` | Aksen sekunder, banner promo, label diskon, high-intensity badge. |
 | `--brand-cyan` | `#00E5FF` | Akses digital, QR pass glow, live meter indicator. |
 | `--text-primary` | `#F8FAFC` | Teks judul utama (*Headings*), teks kontras tinggi. |
 | `--text-muted` | `#94A3B8` | Teks deskripsi, keterangan label, sub-header. |
-| `--border-subtle` | `rgba(255,255,255,0.07)` | Garis batas kartu, pemisah tabel, divider. |
-| `--status-success` | `#10B981` | Check-in berhasil, status active, crowd low. |
-| `--status-warning` | `#F59E0B` | Waitlist status, crowd moderate, masa aktif hampir habis. |
-| `--status-danger` | `#EF4444` | Check-in ditolak, membership expired, crowd busy. |
+| `--border` | `rgba(255,255,255,0.07)` | Garis batas kartu, pemisah tabel, divider. |
 
-### 2.2 Tipografi (Typography Hierarchy)
+### 2.2 Palet Tema Terang (Titanium Lab Theme)
+
+| Kategori Token | Hex Code | Penggunaan |
+| :--- | :--- | :--- |
+| `--bg` | `#F1F5F9` | Latar belakang raw titanium grey, bersih dan berkelas. |
+| `--surface` | `#FFFFFF` | Permukaan kartu putih bersih dengan hairline border. |
+| `--surface-elevated` | `#E2E8F0` | State kartu elevated & hover controls. |
+| `--brand-volt` | `#CAFF33` / `#65A30D` | Aksen volt kontras tinggi pada tombol dan tag. |
+| `--brand-cyan` | `#0284C7` | Aksen status digital & telemetri kelas. |
+| `--text-primary` | `#0A0D14` | Teks hitam obsidian pekat dengan ketajaman maksimal. |
+| `--text-muted` | `#64748B` | Teks keterangan dan deskripsi sekunder. |
+| `--border` | `rgba(10,13,20,0.08)` | Garis batas hairline abu-abu netral. |
+
+### 2.3 Tipografi (Typography Hierarchy)
 
 - **Display & Headings**: `Syne` / `Unbounded` (Tegas, berkarakter atletik, modern).
 - **Body & Controls**: `Plus Jakarta Sans` / `Inter` (Tingkat keterbacaan tinggi pada layar mobile).
@@ -44,108 +55,37 @@ Desain platform mengusung tema **High-Energy Athletic Tech**. Tampilan memadukan
 
 ```mermaid
 graph TD
-    Root[FitHub-Style Full TypeScript Monorepo]
+    Root[KINETIC Next.js 15 Platform]
 
-    subgraph apps/web [Next.js Public & Member PWA]
+    subgraph Core App Router Routes
         Root --> Home[Landing Page: /]
-        Root --> Clubs[Club Finder: /clubs]
-        Root --> Classes[Class Explorer: /classes]
-        Root --> Memberships[Pricing & Checkout: /membership]
-        Root --> MemberApp[Member Portal: /portal]
+        Root --> Clubs[Club Finder 50 Cabang: /clubs]
+        Root --> Classes[Class Schedule & Cinema Spot Picker: /classes]
+        Root --> Trainers[PT Marketplace & WhatsApp: /trainers]
+        Root --> Memberships[Pricing Calculator & Comparison: /membership]
+        Root --> Checkout[Multi-Step Checkout & QRIS: /checkout]
+        Root --> MemberPortal[Member Dashboard & Dynamic QR Pass: /portal]
+        Root --> Onboarding[Athlete Biometric Activation: /onboarding]
     end
 
-    subgraph apps/mobile [React Native Expo App]
-        Root --> MobileApp[Member Mobile App]
-        MobileApp --> QRPassScreen[Dynamic TOTP QR Pass]
-        MobileApp --> BookingScreen[Class & PT Booking]
-        MobileApp --> ProfileScreen[Profile & Membership Freeze]
-    end
-
-    subgraph apps/admin [Next.js Back-Office & POS]
-        Root --> AdminPortal[Staff & Admin Portal]
-        AdminPortal --> GateMonitor[Realtime Gate Monitor]
-        AdminPortal --> POSWalkIn[Walk-in Membership POS]
-        AdminPortal --> RevenueAnalytics[Revenue & Club Utilization]
+    subgraph Admin Command Center
+        Root --> AdminOverview[Admin Hub: /admin]
+        Root --> AdminGate[Turnstile Simulator: /admin/gate]
+        Root --> AdminPOS[Front Desk POS: /admin/pos]
+        Root --> AdminAnalytics[Revenue & Traffic: /admin/analytics]
+        Root --> AdminClasses[Schedule Manager: /admin/classes]
     end
 ```
 
 ---
 
-## 4. Screen Layout Blueprints & Wireframes
+## 4. Komponen Kunci UI/UX
 
-### 4.1 Landing Page Blueprint (Desktop & Mobile)
-
-```
-+-------------------------------------------------------------------------------+
-| [LOGO] KINETIC        Clubs   Classes   Pricing   PT   Blog    [ Masuk / Join ]|
-+-------------------------------------------------------------------------------+
-| HERO SECTION                                                                  |
-|   [ BADGE: #1 TECH-DRIVEN GYM IN INDONESIA ]                                  |
-|   FITNESS MAKIN MUDAH,                                                        |
-|   TERJANGKAU & BEBAS RIBET.                                                   |
-|   Mulai dari Rp 249rb/bln. Akses 50+ Cabang dengan 1 Dynamic QR Pass.        |
-|                                                                               |
-|   [ > Join Membership Sekarang ]     [ Cari Cabang Terdekat (GPS) ]           |
-|                                                                               |
-|   +-------------------+  +-------------------+  +-------------------+         |
-|   | 50+ Clubs         |  | 200+ Live Classes |  | 100% Digital Pass |         |
-|   | Se-Indonesia      |  | Per Minggu        |  | Tanpa Kartu Fisik |         |
-|   +-------------------+  +-------------------+  +-------------------+         |
-+-------------------------------------------------------------------------------+
-| LIVE CROWD & CLUB LOCATOR TEASER                                              |
-|   [ Filter Kota: Jakarta Selatan v ]  [ Opsi: Buka 24 Jam | Free Weights | ..]|
-|                                                                               |
-|   +------------------------+  +------------------------+                      |
-|   | KINETIC - SENOPATI     |  | KINETIC - KUNINGAN     |                      |
-|   | * Live Crowd: [LOW]    |  | * Live Crowd: [MODERATE]|                     |
-|   | 450m dari lokasi Anda  |  | 1.8km dari lokasi Anda |                      |
-|   | Fasilitas: Sauna, Class|  | Fasilitas: Studio, PT  |                      |
-|   | [ Lihat Detail Cabang ]|  | [ Lihat Detail Cabang ]|                      |
-|   +------------------------+  +------------------------+                      |
-+-------------------------------------------------------------------------------+
-```
-
-### 4.2 Member Portal — Dynamic QR Pass Screen (Mobile View)
-
-```
-+------------------------------------------+
-| 09:41                [4G]  [Battery 98%] |
-+------------------------------------------+
-| [Avatar] Halo, Budi Pratama              |
-| Paket: PRO ALL CLUB (Aktif sd 2027)      |
-+------------------------------------------+
-|                                          |
-|         +----------------------+         |
-|         |   ACCESS GATE PASS   |         |
-|         |   KINETIC SUDIRMAN   |         |
-|         |                      |         |
-|         |   [######  ######]   |         |
-|         |   [##  ##  ##  ##]   |         |
-|         |   [######  ######]   |         |
-|         |   [   DYNAMIC QR ]   |         |
-|         |   [######  ######]   |         |
-|         |                      |         |
-|         | (O) Refresh dalam 11s|         |
-|         +----------------------+         |
-|                                          |
-|   Status Gerbang: SIAP SCAN MASUK        |
-|   * Tunjukkan QR ini ke scanner turnstile|
-+------------------------------------------+
-| JADWAL SAYA HARI INI                     |
-| [18:30] BodyPump - Studio 1 (Confirmed)  |
-| Trainer: Sarah Jenkins | [Check-in E-Pass]|
-+------------------------------------------+
-| [ Home ]  [ Book ]  ( (QR PASS) )  [ Profile ]|
-+------------------------------------------+
-```
-
----
-
-## 5. Komponen Kunci & Spesifikasi Micro-Interactions
-
-1. **Dynamic QR Pass Controller**:
-   - Di mobile app (React Native), saat membuka layar QR Pass, kecerahan layar HP otomatis dinaikkan ke 100% menggunakan `expo-brightness` dan animasi countdown berputar 15 detik menggunakan `react-native-reanimated`.
-2. **Realtime Crowd Meter Badge**:
-   - Terkoneksi ke channel Supabase Realtime `supabase.channel('club-crowd').on('postgres_changes', ...)` sehingga persentase kepadatan di kartu cabang berubah seketika tanpa refresh.
-3. **Sticky Action Bar**:
-   - Di mobile browser (< 768px), tombol *Join Membership* dan *Book Class* menempel di bagian bawah layar untuk konversi checkout maksimal.
+1. **Floating Mobile Bottom Navigation (`components/MobileBottomNav.tsx`)**
+   * Memberikan pengalaman layaknya aplikasi native iOS/Android saat diakses melalui browser HP (*PWA Native Illusion*).
+2. **Cinema-Style Studio Spot Picker (`components/StudioSpotPickerModal.tsx`)**
+   * Pemilihan kursi matras/sepeda interaktif berbasis zona (Row A, B, C) dengan ekspor Google Calendar dan iCal (.ics).
+3. **Predictive Crowd AI Modal (`components/PredictiveCrowdModal.tsx`)**
+   * Visualisasi grafik jam lengang dan rute navigasi cepat Google Maps & Waze.
+4. **Interactive 3D Virtual Credit Card (`app/checkout/page.tsx`)**
+   * Kartu virtual 3D interaktif yang berputar halus saat member beralih ke input CVV.
