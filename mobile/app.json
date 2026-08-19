@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "KINETIC Gym",
+    "slug": "kinetic-gym",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#0A0D14"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.kinetic.memberapp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0A0D14"
+      },
+      "package": "com.kinetic.memberapp"
+    }
+  }
+}

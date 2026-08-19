@@ -1,0 +1,20 @@
+{
+  "name": "@kinetic/iot-gate",
+  "version": "1.0.0",
+  "description": "KINETIC Turnstile IoT Gate Controller Daemon for Raspberry Pi 4 / Compute Module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
